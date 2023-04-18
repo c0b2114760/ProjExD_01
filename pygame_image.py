@@ -6,7 +6,7 @@ def main():
     screen = pg.display.set_mode((800, 600))
     clock  = pg.time.Clock()
     bg_img = pg.image.load("ex01/fig/pg_bg.jpg")
-    
+    bg_img2 = [bg_img, pg.transform.flip(bg_img,True,False)]*2
     kk_img = pg.image.load("ex01/fig/3.png")
     kk_img = pg.transform.flip(kk_img,True,False)
     
@@ -21,10 +21,9 @@ def main():
             if event.type == pg.QUIT: return
 
         tmr += 1
-        x = tmr%1600
-        
-        screen.blit(bg_img, [-x, 0])
-        screen.blit(bg_img,[1600-x,0])
+        x = tmr%3200
+        for i in range(4):
+            screen.blit(bg_img2[i],[1600*i-x,0])
         screen.blit(kk_imgs[tmr%100//50], [300, 200])
 
         pg.display.update()
